@@ -12,3 +12,11 @@ Organizado por grupos e em cada grupo aparece a lista de sistemas
 * rodar migrations: `php artisan migrate:fresh --seed` (ambiente dev)
 * rodar: `php artisan serve`
 
+grupos
+    nome
+    coluna
+    ordem
+sistemas
+    nome
+    url
+    comentario

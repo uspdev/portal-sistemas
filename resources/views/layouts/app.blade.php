@@ -2,11 +2,18 @@
 
 @section('title') Sistema USP @endsection
 
+@section('menu')
+    @can('admin')
+        @parent
+    @endcan
+@endsection
+
 @section('styles')
-@parent
-<style>
-    /*seus estilos*/
-</style>
+    @parent
+    <style>
+        /*seus estilos*/
+
+    </style>
 @endsection
 
 @section('footer')
@@ -14,8 +21,8 @@
 @endsection
 
 @section('javascripts_bottom')
-@parent
-<script>
-    // Seu código .js
-</script>
+    @parent
+    <script>
+        // Seu código .js
+    </script>
 @endsection

@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    Seu html que será inserido no meio do layout
+
+    @foreach ($sistemas as $sistema)
+
+        <div>
+            <a href="{{ $sistema->url }}">{{ $sistema->nome }}</a>
+        </div>
+
+    @endforeach
+
 @endsection

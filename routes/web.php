@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $sistemas = \App\Models\Sistema::all();
+    return view('welcome', compact('sistemas'));
 });
