@@ -2,25 +2,23 @@
 
 @section('content')
 
-<div class="row">
-    @foreach ([1,2,3] as $col)
-    <div class="col-md-4">
+  <div class="row">
+    @foreach ([1, 2, 3] as $col)
+      <div class="col-md-4">
         @foreach ($grupos->where('coluna', $col) as $grupo)
-        <div class="h3">{{ $grupo->nome }}</div>
-        <div class="ml-3">
-            @foreach ($grupo->sistemas as $sistema)
-            <div>
-                @if($sistema->url)
-                <a href="{{ $sistema->url }}">{{ $sistema->nome }}</a>
-                @else
-                {{ $sistema->nome }}
-                @endif
+          <div class="card mb-3">
+            <div class="card-header h4">
+              {{ $grupo->nome }}
             </div>
-            @endforeach
-        </div>
+            <div class="card-body">
+              @foreach ($grupo->sistemas as $sistema)
+                @include('partials.sistema')
+              @endforeach
+            </div>
+          </div>
         @endforeach
-    </div>
+      </div>
     @endforeach
-</div>
+  </div>
 
 @endsection
