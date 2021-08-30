@@ -22,7 +22,7 @@ class SistemaFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => $this->faker->name,
+            'nome' => 'Sistema ' . $this->faker->sentence(3),
             'url' => $this->faker->url,
             'descricao' => $this->faker->text,
         ];

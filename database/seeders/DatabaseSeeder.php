@@ -14,13 +14,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        $nomes = ['Acadêmico', 'Financeiro', 'Administrativo', 'Graduação', 'Pós-graduação', 'Biblioteca', 'Informática'];
 
-        for ($i = 0; $i < 5; $i++) {
-            $grupo = \App\Models\Grupo::factory()->create();
+        foreach ($nomes as $nome) {
+            $grupo = \App\Models\Grupo::factory()->create(['nome' => $nome]);
             // $c->settings()->set('estado', 'producao');
-            $numsistemas = mt_rand(1, 5);
+            $numsistemas = mt_rand(2, 8);
             for ($j = 1; $j <= $numsistemas; $j++) {
                 $sistema = \App\Models\Sistema::factory()->create();
+                $sistema->grupos()->save($grupo);
             }
         }
     }
