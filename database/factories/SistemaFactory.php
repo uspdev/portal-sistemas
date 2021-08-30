@@ -21,9 +21,11 @@ class SistemaFactory extends Factory
      */
     public function definition()
     {
+        $url = (rand(0, 100) > 90) ? '' : $this->faker->url;
+
         return [
             'nome' => 'Sistema ' . $this->faker->sentence(3),
-            'url' => $this->faker->url,
+            'url' => $url,
             'descricao' => $this->faker->text,
         ];
     }

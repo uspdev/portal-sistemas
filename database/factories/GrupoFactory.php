@@ -23,6 +23,7 @@ class GrupoFactory extends Factory
     {
         return [
             'nome' => $this->faker->word,
+            'coluna' => rand(1,3),
             //
         ];
     }

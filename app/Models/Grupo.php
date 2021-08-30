@@ -14,6 +14,6 @@ class Grupo extends Model
      */
     public function sistemas()
     {
-        return $this->belongsToMany(Grupo::class, 'sistema_grupo');
+        return $this->belongsToMany(Sistema::class, 'sistema_grupo');
     }
 }

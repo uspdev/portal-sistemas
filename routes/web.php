@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $sistemas = \App\Models\Sistema::all();
-    return view('welcome', compact('sistemas'));
+    $grupos = \App\Models\Grupo::all();
+    return view('welcome', compact('sistemas', 'grupos'));
 });
