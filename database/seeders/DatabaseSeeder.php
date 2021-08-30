@@ -14,6 +14,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        \App\Models\Sistema::factory(10)->create();
+
+        for ($i = 0; $i < 5; $i++) {
+            $grupo = \App\Models\Grupo::factory()->create();
+            // $c->settings()->set('estado', 'producao');
+            $numsistemas = mt_rand(1, 5);
+            for ($j = 1; $j <= $numsistemas; $j++) {
+                $sistema = \App\Models\Sistema::factory()->create();
+            }
+        }
     }
 }
