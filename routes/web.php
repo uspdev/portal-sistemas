@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SistemaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,5 @@ Route::get('/', function () {
     $grupos = \App\Models\Grupo::all();
     return view('welcome', compact('sistemas', 'grupos'));
 });
+
+Route::resource('sistemas', SistemaController::class);

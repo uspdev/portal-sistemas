@@ -14,7 +14,9 @@ class SistemaController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('admin');
+        $sistemas = Sistema::all();
+        return view('sistemas.index', compact('sistemas'));
     }
 
     /**
@@ -41,21 +43,21 @@ class SistemaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sistemas  $sistemas
+     * @param  \App\Models\Sistema  $sistema
      * @return \Illuminate\Http\Response
      */
-    public function show(Sistemas $sistemas)
+    public function show(Sistema $sistema)
     {
-        //
+        dd($sistema);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sistemas  $sistemas
+     * @param  \App\Models\Sistema  $sistema
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sistemas $sistemas)
+    public function edit(Sistema $sistema)
     {
         //
     }
@@ -64,10 +66,10 @@ class SistemaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sistemas  $sistemas
+     * @param  \App\Models\Sistema  $sistema
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sistemas $sistemas)
+    public function update(Request $request, Sistema $sistema)
     {
         //
     }
@@ -75,10 +77,10 @@ class SistemaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sistemas  $sistemas
+     * @param  \App\Models\Sistema  $sistema
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sistemas $sistemas)
+    public function destroy(Sistema $sistema)
     {
         //
     }
