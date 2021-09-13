@@ -17,6 +17,7 @@ class GrupoForm extends Component
         'grupo.coluna' => 'required|integer', //colocar limites min e max
         'grupo.descricao' => 'nullable|string',
         'grupo.linha' => 'required|integer',
+        'grupo.exibir' => 'required|boolean',
         'colunaArray' => '',
         'ordemArray' => '',
     ];

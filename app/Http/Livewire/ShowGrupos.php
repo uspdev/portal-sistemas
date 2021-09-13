@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Gate;
 class ShowGrupos extends Component
 {
     public $grupos;
-    public $sistemasOrfaos;
+    public $sistemasSemGrupo;
     public $modalTitle = 'Adicionar/editar grupo';
 
     protected $listeners = [
@@ -20,7 +20,7 @@ class ShowGrupos extends Component
 
     public function refresh()
     {
-        $this->grupos = Grupo::all();
+        $this->mount();
     }
 
     public function setModalTitle($title)
@@ -30,7 +30,7 @@ class ShowGrupos extends Component
 
     public function mount()
     {
-        $this->sistemasOrfaos = Gate::allows('gerente') ? Sistema::doesntHave('grupos')->get() : [];
+        $this->sistemasSemGrupo = Gate::allows('gerente') ? Sistema::doesntHave('grupos')->get() : collect();
         $this->grupos = Grupo::all();
     }
 

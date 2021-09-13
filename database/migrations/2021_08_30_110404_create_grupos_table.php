@@ -19,6 +19,7 @@ class CreateGruposTable extends Migration
             $table->text('descricao')->nullable();
             $table->integer('coluna')->nullable();
             $table->integer('linha')->nullable();
+            $table->boolean('exibir');
             $table->timestamps();
         });
     }

@@ -3,6 +3,8 @@
     <div class="d-flex">
       <x-wire-input-text wire:model.lazy="grupo.nome" prepend="Nome" class="mr-auto" />
 
+      <x-form-switch label="Exibir" wire:model="grupo.exibir" />
+
       <x-form-select prepend="COL" :options="$colunaArray" wire:model="grupo.coluna">
         <option value="">?</option>
       </x-form-select>

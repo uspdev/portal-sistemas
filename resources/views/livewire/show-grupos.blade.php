@@ -2,8 +2,10 @@
 
   @can('gerente')
     <button class="btn btn-primary mb-3" wire:click="$emit('criarGrupo')">Novo Grupo</button>
+    <button class="btn btn-warning mb-3" wire:click="$emit('criarItem')">Novo Item de grupo</button>
   @endcan
 
+  {{-- Grupos e itens --}}
   <div class="row">
     @foreach (range(1, config('portal-sistemas.num_cols')) as $col)
       <div class="col-md-{{ config('portal-sistemas.col_width') }}">
@@ -21,9 +23,9 @@
     @endforeach
   </div>
 
-  @includeWhen(Gate::allows('gerente'), 'partials.sistemas-sem-grupo')
+  @includeWhen(Gate::allows('gerente') && $sistemasSemGrupo->isNotEmpty(), 'livewire.partials.sistemas-sem-grupo')
 
-  <!-- Modal -->
+  <!-- Modal de grupo -->
   <div class="modal" tabindex="-1" id="modalGrupo">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
