@@ -3,7 +3,7 @@
     <div class="card mb-3">
       <div class="card-header">
         <span class="h4 text-danger" title="Não aparecem no portal">
-          @include('livewire.partials.badge-nao-exibir')
+          <span class="badge text-warning"><i class="fas fa-eye-slash"></i></span>
           Sistemas sem grupo
         </span>
       </div>
