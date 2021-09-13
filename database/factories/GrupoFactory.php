@@ -21,9 +21,12 @@ class GrupoFactory extends Factory
      */
     public function definition()
     {
+        $descricao = (rand(1,10)>8) ? $this->faker->text : ''; 
+
         return [
             'nome' => $this->faker->word,
             'coluna' => rand(1,3),
+            'descricao' => $descricao,
             //
         ];
     }
