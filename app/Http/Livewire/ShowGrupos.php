@@ -12,6 +12,8 @@ class ShowGrupos extends Component
     public $grupos;
     public $sistemasSemGrupo;
     public $modalTitle = 'Adicionar/editar grupo';
+    public $colunas;
+    public $colunasPerdidas;
 
     protected $listeners = [
         'setModalTitle',
@@ -32,6 +34,9 @@ class ShowGrupos extends Component
     {
         $this->sistemasSemGrupo = Gate::allows('gerente') ? Sistema::doesntHave('grupos')->get() : collect();
         $this->grupos = Grupo::all();
+
+        $this->colunas = range(1, config('portal-sistemas.num_cols'));
+        $this->colunasPerdidas = (config('portal-sistemas.num_cols') < 4) ? range(config('portal-sistemas.num_cols') + 1, 4) : [];
     }
 
     public function render()

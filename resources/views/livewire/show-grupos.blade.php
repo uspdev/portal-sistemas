@@ -7,7 +7,7 @@
 
   {{-- Grupos e itens --}}
   <div class="row">
-    @foreach (range(1, config('portal-sistemas.num_cols')) as $col)
+    @foreach ($colunas as $col)
       <div class="col-md-{{ config('portal-sistemas.col_width') }}">
         @include('livewire.partials.grupos-coluna')
       </div>
@@ -16,7 +16,7 @@
 
   {{-- Grupos sem colunas --}}
   <div class="row">
-    @foreach (range(config('portal-sistemas.num_cols') + 1, 4) as $col)
+    @foreach ($colunasPerdidas as $col)
       <div class="col-md-12">
         @include('livewire.partials.grupos-coluna')
       </div>
