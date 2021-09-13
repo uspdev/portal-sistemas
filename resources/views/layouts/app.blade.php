@@ -1,26 +1,36 @@
 @extends('laravel-usp-theme::master')
 
 @section('menu')
-    @can('admin')
-        @parent
-    @endcan
+  @can('gerente')
+    @parent
+  @endcan
 @endsection
 
 @section('styles')
-    @parent
-    <style>
-        /*seus estilos*/
+  @parent
+  @livewireStyles
+  <style>
 
-    </style>
+      /* mostra to-show ao passar o mouse sobre to-hover */
+    .to-show {
+      display: none;
+    }
+
+    .to-hover:hover>.to-show {
+      display: inline-block;
+    }
+
+  </style>
 @endsection
 
 @section('footer')
-    Seu código
+  Seu código
 @endsection
 
 @section('javascripts_bottom')
-    @parent
-    <script>
-        // Seu código .js
-    </script>
+  @parent
+  @livewireScripts
+  <script>
+    // Seu código .js
+  </script>
 @endsection

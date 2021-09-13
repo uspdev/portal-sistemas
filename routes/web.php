@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\ShowGrupos;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
 
@@ -14,10 +16,4 @@ use App\Http\Controllers\SistemaController;
 |
 */
 
-Route::get('/', function () {
-    $sistemas = \App\Models\Sistema::all();
-    $grupos = \App\Models\Grupo::all();
-    return view('welcome', compact('sistemas', 'grupos'));
-});
-
-Route::resource('sistemas', SistemaController::class);
+Route::get('/', ShowGrupos::class);
