@@ -1,11 +1,11 @@
 <?php
 
 $menu = [
-    [
-        'text' => '<i class="fas fa-cog"></i> Gerenciar sistemas',
-        'url' => 'sistemas',
-        'can' => 'admin'
-    ],
+    // [
+    //     'text' => '<i class="fas fa-cog"></i> Gerenciar sistemas',
+    //     'url' => 'sistemas',
+    //     'can' => 'admin'
+    // ],
 ];
 
 $right_menu = [
