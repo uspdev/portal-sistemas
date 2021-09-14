@@ -6,6 +6,9 @@
           <span class="badge text-warning"><i class="fas fa-eye-slash"></i></span>
           Sistemas sem grupo
         </span>
+        <div class="text-secondary">
+          Estes sistemas não estão associados a grupo algum, portanto não estão visíveis no portal. 
+        </div>
       </div>
       <div class="card-body">
         @foreach ($sistemasSemGrupo as $sistema)
