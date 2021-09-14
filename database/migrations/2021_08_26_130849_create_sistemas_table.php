@@ -18,6 +18,7 @@ class CreateSistemasTable extends Migration
             $table->string('nome');
             $table->string('url')->nullable();
             $table->text('descricao')->nullable();
+            $table->boolean('exibir');
             $table->timestamps();
         });
     }
