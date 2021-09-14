@@ -9,6 +9,11 @@ class Sistema extends Model
 {
     use HasFactory;
 
+    protected $attributes = [
+        'exibir' => false,
+    ];
+
+
     /**
      * Relacionamento com grupo
      */

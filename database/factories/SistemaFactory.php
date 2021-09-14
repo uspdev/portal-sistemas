@@ -22,11 +22,13 @@ class SistemaFactory extends Factory
     public function definition()
     {
         $url = (rand(0, 100) > 90) ? '' : $this->faker->url;
+        $exibir = (rand(1, 10) > 9) ? false : true;
 
         return [
             'nome' => 'Sistema ' . $this->faker->sentence(3),
             'url' => $url,
             'descricao' => $this->faker->text,
+            'exibir' => $exibir,
         ];
     }
 }

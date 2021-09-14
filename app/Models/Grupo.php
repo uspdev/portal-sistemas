@@ -16,7 +16,7 @@ class Grupo extends Model
      */
     protected $attributes = [
         'coluna' => 1,
-        'exibir' => true,
+        'exibir' => false,
     ];
 
     /**
