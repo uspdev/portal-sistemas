@@ -1,4 +1,4 @@
-<button class="btn btn-outline-danger d-inline-flex destruirGrupo" onclick="confirme({{ $grupo->id }})">
+<button class="btn btn-outline-danger d-inline-flex " onclick="destruirGrupo({{ $grupo->id }})">
   <i class="fas fa-times"></i>
 </button>
 
@@ -6,7 +6,7 @@
   @section('javascripts_bottom')
     @parent
     <script>
-      function confirme(id) {
+      function destruirGrupo(id) {
         console.log(id)
         if (confirm('Tem certeza?')) {
           Livewire.emit('destruirGrupo', id)

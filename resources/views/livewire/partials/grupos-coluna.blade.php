@@ -3,11 +3,10 @@
 @foreach ($grupos->where('coluna', $col)->sortBy('linha') as $grupo)
   @if ($grupo->exibir || Gate::check('gerente'))
     <div class="card mb-3">
-      <div class="card-header to-hover">
+      <div class="card-header to-hover py-2">
         <span class="h4">
           @include('livewire.partials.grupo-nome')
         </span>
-
         @includeWhen(Gate::allows('gerente'), 'livewire.partials.badge-grupo-sem-coluna')
 
         {{-- mostra com hover do mouse --}}
@@ -21,14 +20,8 @@
         </div>
       </div>
       <div class="card-body">
-        @can('gerente')
-          <a href class="text-warning mb-3" wire:click.prevent="$emit('criarSistema')">
-            <i class="fas fa-plus"></i> Adicionar item
-          </a>
-        @endcan
-
-        @foreach ($grupo->sistemas as $sistema)
-          @include('livewire.partials.sistema')
+        @foreach ($grupo->sistemas as $item)
+            @includeWhen($item->exibir || Gate::check('gerente'), 'livewire.partials.item')
         @endforeach
       </div>
     </div>

@@ -73,7 +73,7 @@ class GrupoForm extends Component
     {
         $this->grupo = new Grupo;
         $this->colunaArray = $this->grupo->colunaArray();
-        $this->ordemArray = [];//$this->grupo->ordemArray();
+        $this->ordemArray = []; // será carregado dinamicamente 
     }
 
     public function render()

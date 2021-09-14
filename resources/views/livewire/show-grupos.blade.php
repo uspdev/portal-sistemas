@@ -5,7 +5,7 @@
     <button class="btn btn-warning mb-3" wire:click="$emit('criarItem')">Novo Item de grupo</button>
   @endcan
 
-  {{-- Grupos e itens --}}
+  {{-- Grupos regulares --}}
   <div class="row">
     @foreach ($colunas as $col)
       <div class="col-md-{{ config('portal-sistemas.col_width') }}">
@@ -23,7 +23,8 @@
     @endforeach
   </div>
 
-  @includeWhen(Gate::allows('gerente') && $sistemasSemGrupo->isNotEmpty(), 'livewire.partials.sistemas-sem-grupo')
+  {{-- Itens sem grupo --}}
+  @includeWhen(Gate::allows('gerente') && $sistemasSemGrupo->isNotEmpty(), 'livewire.partials.itens-sem-grupo')
 
   <!-- Modal de grupo -->
   <div class="modal" tabindex="-1" id="modalGrupo">
@@ -42,6 +43,23 @@
     </div>
   </div>
 
+    <!-- Modal de item -->
+    <div class="modal" tabindex="-1" id="modalItem">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Novo/editar item</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            @livewire('item-form')
+          </div>
+        </div>
+      </div>
+    </div>
+
   @section('javascripts_bottom')
     @parent
     <script>
@@ -52,6 +70,15 @@
 
       window.addEventListener('closeGrupoModal', event => {
         $('#modalGrupo').modal('hide')
+      })
+
+      window.addEventListener('openItemModal', event => {
+        $('#modalItem').find('.modal-title').html(event.detail.modalTitle)
+        $('#modalItem').modal('show')
+      })
+
+      window.addEventListener('closeItemModal', event => {
+        $('#modalItem').modal('hide')
       })
     </script>
   @endsection
