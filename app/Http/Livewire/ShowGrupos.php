@@ -11,23 +11,16 @@ class ShowGrupos extends Component
 {
     public $grupos;
     public $sistemasSemGrupo;
-    public $modalTitle = 'Adicionar/editar grupo';
     public $colunas;
     public $colunasPerdidas;
 
     protected $listeners = [
-        'setModalTitle',
         'refresh',
     ];
 
     public function refresh()
     {
         $this->mount();
-    }
-
-    public function setModalTitle($title)
-    {
-        $this->modalTitle = $title;
     }
 
     public function mount()

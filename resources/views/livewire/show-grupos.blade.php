@@ -30,7 +30,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ $modalTitle ?? ''}}</h5>
+          <h5 class="modal-title">Novo/editar grupo</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -46,6 +46,7 @@
     @parent
     <script>
       window.addEventListener('openGrupoModal', event => {
+        $('#modalGrupo').find('.modal-title').html(event.detail.modalTitle)
         $('#modalGrupo').modal('show')
       })
 
