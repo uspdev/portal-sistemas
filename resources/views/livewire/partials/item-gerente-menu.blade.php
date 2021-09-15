@@ -1,4 +1,4 @@
-<span class="to-show float-right">
+<span class="to-show ml-2">
   <button class="btn btn-sm btn-outline-primary py-0" wire:click="$emit('editarItem', {{ $item->id }})">
     <i class="fas fa-edit"></i>
   </button>
