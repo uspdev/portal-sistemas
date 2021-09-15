@@ -59,7 +59,7 @@ class ItemForm extends Component
     public function mount()
     {
         $this->item = new Item;
-        $this->gruposSelect = [];
+        $this->gruposSelect = Grupo::pluck('nome', 'id');;
     }
 
     public function render()
