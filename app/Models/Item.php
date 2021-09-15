@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sistema extends Model
+class Item extends Model
 {
     use HasFactory;
 
@@ -13,13 +13,19 @@ class Sistema extends Model
         'exibir' => false,
     ];
 
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'itens';
 
     /**
      * Relacionamento com grupo
      */
-    public function grupos()
+    public function grupo()
     {
-        return $this->belongsToMany(Grupo::class, 'sistema_grupo');
+        return $this->belongsTo(Grupo::class);
     }
 
 }

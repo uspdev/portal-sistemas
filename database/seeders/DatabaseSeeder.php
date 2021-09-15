@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
         foreach ($nomes as $nome) {
             $grupo = \App\Models\Grupo::factory()->create(['nome' => $nome]);
             // $c->settings()->set('estado', 'producao');
-            $numsistemas = mt_rand(2, 8);
-            for ($j = 1; $j <= $numsistemas; $j++) {
-                $sistema = \App\Models\Sistema::factory()->create();
-                $sistema->grupos()->save($grupo);
+            $numItens = mt_rand(2, 8);
+            for ($j = 1; $j <= $numItens; $j++) {
+                $item = \App\Models\Item::factory()->create(['grupo_id' => $grupo->id]);
+                // $item->grupo()->save($grupo);
             }
         }
     }

@@ -161,10 +161,10 @@ class Grupo extends Model
     }
 
     /**
-     * Relacionamento com sistemna
+     * Relacionamento com itens
      */
-    public function sistemas()
+    public function itens()
     {
-        return $this->belongsToMany(Sistema::class, 'sistema_grupo');
+        return $this->hasMany(Item::class);
     }
 }

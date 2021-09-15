@@ -2,7 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Sistema;
+use App\Models\Grupo;
+use App\Models\Item;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
 
@@ -10,12 +11,14 @@ class ItemForm extends Component
 {
 
     public $item;
+    public $gruposSelect;
 
     protected $rules = [
         'item.nome' => 'required',
         'item.url' => 'nullable|url',
         'item.descricao' => 'nullable|string',
         'item.exibir' => 'required|boolean',
+        'item.grupo_id' => 'required|integer',
     ];
 
     protected $listeners = [
@@ -27,14 +30,15 @@ class ItemForm extends Component
     public function criarItem()
     {
         Gate::allows('gerente');
-        $this->item = new Sistema;
+        $this->item = new Item;
         $this->dispatchBrowserEvent('openItemModal', ['modalTitle'=>'Novo item']);
     }
 
     public function editarItem($itemId)
     {
         Gate::allows('gerente');
-        $this->item = Sistema::find($itemId);
+        $this->item = Item::find($itemId);
+        $this->gruposSelect = Grupo::pluck('nome', 'id');
         $this->dispatchBrowserEvent('openItemModal', ['modalTitle'=>'Editar item']);
     }
 
@@ -47,14 +51,15 @@ class ItemForm extends Component
 
     public function destruirItem($itemId) {
         Gate::allows('gerente');
-        Sistema::destroy($itemId);
-        $this->item = new Sistema; // inicializa as variaveis
+        Item::destroy($itemId);
+        $this->mount(); // inicializa as variaveis
         $this->emitUp('refresh');
     }
 
     public function mount()
     {
-        $this->item = new Sistema;
+        $this->item = new Item;
+        $this->gruposSelect = [];
     }
 
     public function render()

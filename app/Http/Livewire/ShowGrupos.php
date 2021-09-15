@@ -3,14 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Models\Grupo;
-use App\Models\Sistema;
+use App\Models\Item;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
 
 class ShowGrupos extends Component
 {
     public $grupos;
-    public $sistemasSemGrupo;
+    public $itensSemGrupo;
     public $colunas;
     public $colunasPerdidas;
 
@@ -25,7 +25,7 @@ class ShowGrupos extends Component
 
     public function mount()
     {
-        $this->sistemasSemGrupo = Gate::allows('gerente') ? Sistema::doesntHave('grupos')->get() : collect();
+        $this->itensSemGrupo = Gate::allows('gerente') ? Item::whereNull('grupo_id')->get() : collect();
         $this->grupos = Grupo::all();
 
         $this->colunas = range(1, config('portal-sistemas.num_cols'));

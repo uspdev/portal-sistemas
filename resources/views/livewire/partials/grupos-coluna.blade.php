@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="card-body">
-        @foreach ($grupo->sistemas as $item)
+        @foreach ($grupo->itens as $item)
             @includeWhen($item->exibir || Gate::check('gerente'), 'livewire.partials.item')
         @endforeach
       </div>

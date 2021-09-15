@@ -24,7 +24,7 @@
   </div>
 
   {{-- Itens sem grupo --}}
-  @includeWhen(Gate::allows('gerente') && $sistemasSemGrupo->isNotEmpty(), 'livewire.partials.itens-sem-grupo')
+  @includeWhen(Gate::allows('gerente') && $itensSemGrupo->isNotEmpty(), 'livewire.partials.itens-sem-grupo')
 
   <!-- Modal de grupo -->
   <div class="modal" tabindex="-1" id="modalGrupo">

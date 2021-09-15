@@ -25,7 +25,7 @@ class GrupoFactory extends Factory
         $exibir = (rand(1, 10) > 9) ? false : true;
         return [
             'nome' => $this->faker->word,
-            'coluna' => rand(1, 3),
+            'coluna' => rand(1, 4),
             'descricao' => $descricao,
             'exibir' => $exibir,
         ];

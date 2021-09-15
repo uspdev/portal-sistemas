@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSistemasTable extends Migration
+class CreateItensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateSistemasTable extends Migration
      */
     public function up()
     {
-        Schema::create('sistemas', function (Blueprint $table) {
+        Schema::create('itens', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
             $table->string('url')->nullable();
             $table->text('descricao')->nullable();
             $table->boolean('exibir');
+            $table->foreignId('grupo_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateSistemasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sistemas');
+        Schema::dropIfExists('itens');
     }
 }

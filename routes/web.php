@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Grupo;
 use App\Http\Livewire\ShowGrupos;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
+use Illuminate\Database\Eloquent\Collection;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +17,13 @@ use App\Http\Controllers\SistemaController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('/', function(){
+//     dd(Grupo::all() instanceof Collection);
+//     foreach(Grupo::all()  as $grupo) {
+//         echo $grupo->nome, '<br>';
+//         dd($grupo instanceof Collection);
+//     }
+// });
 
 Route::get('/', ShowGrupos::class);

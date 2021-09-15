@@ -8,7 +8,6 @@
         <div class="input-group-text">{{ $prepend }}</div>
       </div>
     @endif
-
     <select class="custom-select" {{ $attributes }}>
 
       {{ $slot }}

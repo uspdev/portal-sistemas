@@ -2,6 +2,7 @@
   <form>
     <div class="d-flex">
       <x-wire-input-text wire:model.lazy="item.nome" prepend="Nome" class="mr-auto" />
+      <x-form-select wire:model="item.grupo_id" :options="$gruposSelect" prepend="Grupo"></x-wire-select>
       <x-form-switch label="Exibir" wire:model="item.exibir" />
     </div>
     <x-wire-input-text wire:model.lazy="item.url" prepend="URL" class="mr-auto" />

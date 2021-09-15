@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="card-body">
-        @foreach ($sistemasSemGrupo as $item)
+        @foreach ($itensSemGrupo as $item)
           @include('livewire.partials.item')
         @endforeach
       </div>
