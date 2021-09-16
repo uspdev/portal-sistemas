@@ -27,7 +27,7 @@ class ItemFactory extends Factory
         return [
             'nome' => 'Sistema ' . $this->faker->sentence(3),
             'url' => $url,
-            'descricao' => $this->faker->text,
+            'descricao' => (rand(0, 100) > 80) ? $this->faker->text : '',
             'exibir' => $exibir,
         ];
     }
