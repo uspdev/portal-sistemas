@@ -45,6 +45,7 @@ class ItemForm extends Component
     public function salvarItem() {
         Gate::allows('gerente');
         $this->item->save();
+        $this->mount();
         $this->dispatchBrowserEvent('closeItemModal');
         $this->emitUp('refresh');
     }
