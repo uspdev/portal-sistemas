@@ -1,7 +1,7 @@
 @extends('laravel-usp-theme::master')
 
 @section('menu')
-  @can('gerente')
+  @can('user')
     @parent
   @endcan
 @endsection
