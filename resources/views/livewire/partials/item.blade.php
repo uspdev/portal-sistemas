@@ -37,7 +37,7 @@
 
         $('body').on('click', '.toggleDescricao', function() {
           console.log('toggleDescricao')
-          $(this).parent().find('.descricao').slideToggle()
+          $(this).parent().find('.descricao').slideToggle(200)
         })
 
       })

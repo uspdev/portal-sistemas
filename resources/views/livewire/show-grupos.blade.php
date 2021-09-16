@@ -9,7 +9,14 @@
   <div class="row">
     @foreach ($colunas as $col)
       <div class="col-md-{{ config('portal-sistemas.col_width') }}">
-        @include('livewire.partials.grupos-coluna')
+
+        {{-- Mostra os grupos de uma mesma coluna --}}
+        @foreach ($grupos->where('coluna', $col)->sortBy('linha') as $grupo)
+          @if ($grupo->exibir || Gate::check('gerente'))
+            @include('livewire.partials.grupo-card')
+          @endif
+        @endforeach
+
       </div>
     @endforeach
   </div>
@@ -18,7 +25,11 @@
   <div class="row">
     @foreach ($colunasPerdidas as $col)
       <div class="col-md-12">
-        @include('livewire.partials.grupos-coluna')
+
+        @foreach ($grupos->where('coluna', $col)->sortBy('linha') as $grupo)
+          @include('livewire.partials.grupo-card')
+        @endforeach
+        
       </div>
     @endforeach
   </div>
@@ -43,22 +54,22 @@
     </div>
   </div>
 
-    <!-- Modal de item -->
-    <div class="modal" tabindex="-1" id="modalItem">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Novo/editar item</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            @livewire('item-form')
-          </div>
+  <!-- Modal de item -->
+  <div class="modal" tabindex="-1" id="modalItem">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Novo/editar item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          @livewire('item-form')
         </div>
       </div>
     </div>
+  </div>
 
   @section('javascripts_bottom')
     @parent
