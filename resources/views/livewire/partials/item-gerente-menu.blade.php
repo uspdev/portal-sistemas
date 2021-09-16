@@ -12,7 +12,7 @@
     @parent
     <script>
       function destruirItem(id) {
-        console.log(id)
+        console.log('destruirItem', id)
         if (confirm('Tem certeza?')) {
           Livewire.emit('destruirItem', id)
         }
