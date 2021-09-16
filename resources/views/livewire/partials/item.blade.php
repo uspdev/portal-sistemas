@@ -1,4 +1,4 @@
-<div class="to-hover hover-bg">
+<div class="to-hover hover-bg item">
   @if (!$item->exibir)
     <span class="badge text-warning"><i class="fas fa-eye-slash"></i></span>
   @endif
@@ -14,7 +14,7 @@
   @endif
 
   @includeWhen(Gate::allows('gerente'), 'livewire.partials.item-gerente-menu')
-  
+
   <div class="descricao ml-3">{{ $item->descricao }}</div>
 </div>
 
@@ -35,7 +35,7 @@
     <script>
       $(document).ready(function() {
 
-        $('.toggleDescricao').on('click', function() {
+        $('body').on('click', '.toggleDescricao', function() {
           console.log('toggleDescricao')
           $(this).parent().find('.descricao').slideToggle()
         })
