@@ -4,7 +4,7 @@
   @endif
 
   @if ($item->url)
-    <a href="{{ $item->url }}">{{ $item->nome }}</a>
+    <a href="{{ $item->url }}" target="_BLANK">{{ $item->nome }}</a>
   @else
     {{ $item->nome }}
   @endif
