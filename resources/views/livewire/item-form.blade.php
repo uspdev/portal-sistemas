@@ -6,7 +6,7 @@
       <x-wire-switch label="Exibir" model="item.exibir" />
     </div>
     <x-wire-input-text model="item.url" prepend="URL" class="mr-auto" />
-    <x-wire-textarea label="Descrição" wire:model="item.descricao" />
+    <x-wire-textarea label="Descrição" model="item.descricao" />
     <div class="d-flex flex-row">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
       <button type="submit" class="btn btn-primary ml-2" wire:click.prevent="salvarItem">Salvar</button>
