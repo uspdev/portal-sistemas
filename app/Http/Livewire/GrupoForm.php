@@ -15,12 +15,10 @@ class GrupoForm extends Component
 
     protected $rules = [
         'grupo.nome' => 'required|string|max:100',
-        'grupo.coluna' => 'required|integer', //colocar limites min e max
-        'grupo.descricao' => 'nullable|string',
+        'grupo.coluna' => 'required|integer|min:1', //colocar limites min e max
         'grupo.linha' => 'required|integer',
         'grupo.exibir' => 'required|boolean',
-        'colunaArray' => '',
-        'ordemArray' => '',
+        'grupo.descricao' => 'nullable|string',
     ];
 
     protected $listeners = [
@@ -29,10 +27,16 @@ class GrupoForm extends Component
         'destruirGrupo',
     ];
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function updatingGrupo($value, $key)
     {
         // se mudar a coluna, vamos atualizar as opções de linha
         if ($key == 'coluna') {
+            $this->grupo->linha = !$this->grupo->linha ?: 1;
             $this->ordemArray = $this->grupo->ordemArray($value);
         }
     }
@@ -40,9 +44,7 @@ class GrupoForm extends Component
     public function criarGrupo()
     {
         Gate::allows('gerente');
-        $this->grupo = new Grupo;
-        $this->colunaArray = $this->grupo->colunaArray();
-        $this->ordemArray = $this->grupo->ordemArray();
+        $this->mount();
         $this->dispatchBrowserEvent('openGrupoModal', ['modalTitle'=>'Novo grupo']);
     }
 
@@ -53,27 +55,33 @@ class GrupoForm extends Component
         $this->colunaArray = $this->grupo->colunaArray();
         $this->ordemArray = $this->grupo->ordemArray();
         $this->dispatchBrowserEvent('openGrupoModal', ['modalTitle'=>'Editar grupo']);
+        $this->validate();
     }
 
     public function salvarGrupo() {
         Gate::allows('gerente');
+        $this->validate();
+
         $this->grupo->save();
         $this->dispatchBrowserEvent('closeGrupoModal');
+        $this->mount();
         $this->emitUp('refresh');
     }
 
     public function destruirGrupo($grupoId) {
         Gate::allows('gerente');
         Grupo::destroy($grupoId);
-        $this->grupo = new Grupo; // inicializa as variaveis
+        $this->mount();
         $this->emitUp('refresh');
     }
 
     public function mount()
     {
         $this->grupo = new Grupo;
-        $this->colunaArray = $this->grupo->colunaArray();
+        $this->colunaArray = array_merge(['0'=>'?'],$this->grupo->colunaArray());
         $this->ordemArray = []; // será carregado dinamicamente 
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     public function render()

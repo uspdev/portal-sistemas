@@ -1,14 +1,12 @@
 <div>
   <form>
     <div class="d-flex">
-      <x-wire-input-text wire:model.lazy="grupo.nome" prepend="Nome" class="mr-auto" />
-      <x-form-select prepend="COL" :options="$colunaArray" wire:model="grupo.coluna">
-        <option value="">?</option>
-      </x-form-select>
-      <x-form-select prepend="LIN" :options="$ordemArray" wire:model="grupo.linha" />
-      <x-form-switch label="Exibir" wire:model="grupo.exibir" />
+      <x-wire-input-text model="grupo.nome" prepend="Nome" class="mr-auto" />
+      <x-wire-select prepend="COL" :options="$colunaArray" model="grupo.coluna" />
+      <x-wire-select prepend="LIN" :options="$ordemArray" model="grupo.linha" />
+      <x-wire-switch label="Exibir" model="grupo.exibir" />
     </div>
-    <x-form-textarea label="Descrição" wire:model="grupo.descricao" />
+    <x-wire-textarea label="Descrição" model="grupo.descricao" />
 
     <div class="d-flex flex-row">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

@@ -15,7 +15,7 @@ class Grupo extends Model
      * @var array
      */
     protected $attributes = [
-        'coluna' => 1,
+        // 'coluna' => 0,
         'exibir' => false,
     ];
 
@@ -143,7 +143,7 @@ class Grupo extends Model
         return $this;
     }
 
-    public function colunaArray()
+    public static function colunaArray()
     {
         $range = range(1, config('portal-sistemas.num_cols'));
         return array_combine($range, $range);

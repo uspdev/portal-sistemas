@@ -4,8 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Grupo;
 use App\Models\Item;
-use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
+use Livewire\Component;
 
 class ItemForm extends Component
 {
@@ -18,7 +18,7 @@ class ItemForm extends Component
         'item.url' => 'nullable|url',
         'item.descricao' => 'nullable|string',
         'item.exibir' => 'required|boolean',
-        'item.grupo_id' => 'required|integer',
+        'item.grupo_id' => ['required', 'exists:grupos,id'],
     ];
 
     protected $listeners = [
@@ -27,11 +27,16 @@ class ItemForm extends Component
         'destruirItem',
     ];
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function criarItem()
     {
         Gate::allows('gerente');
-        $this->item = new Item;
-        $this->dispatchBrowserEvent('openItemModal', ['modalTitle'=>'Novo item']);
+        $this->mount();
+        $this->dispatchBrowserEvent('openItemModal', ['modalTitle' => 'Novo item']);
     }
 
     public function editarItem($itemId)
@@ -39,18 +44,22 @@ class ItemForm extends Component
         Gate::allows('gerente');
         $this->item = Item::find($itemId);
         $this->gruposSelect = Grupo::pluck('nome', 'id');
-        $this->dispatchBrowserEvent('openItemModal', ['modalTitle'=>'Editar item']);
+        $this->dispatchBrowserEvent('openItemModal', ['modalTitle' => 'Editar item']);
+        $this->validate();
     }
 
-    public function salvarItem() {
+    public function salvarItem()
+    {
         Gate::allows('gerente');
+        $this->validate();
         $this->item->save();
-        $this->mount();
         $this->dispatchBrowserEvent('closeItemModal');
+        $this->mount();
         $this->emitUp('refresh');
     }
 
-    public function destruirItem($itemId) {
+    public function destruirItem($itemId)
+    {
         Gate::allows('gerente');
         Item::destroy($itemId);
         $this->mount(); // inicializa as variaveis
@@ -61,6 +70,8 @@ class ItemForm extends Component
     {
         $this->item = new Item;
         $this->gruposSelect = Grupo::pluck('nome', 'id')->prepend('Selecione um..', 0);
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 
     public function render()

@@ -1,11 +1,12 @@
 @props([
+    'model' => '',
     'prepend' => '',
     'label' => '',
     'class' => '',
-    'id' => mt_rand(1000000, 1999999),
+    'id' => mt_rand(1000000, 9999999),
 ])
 
-<div class="form-group {{ $class }}">
+<div class="form-group {{ $class }} wire-input-text">
   @if ($label)<label for="{{ $id }}">{{ $label }}</label>@endif
   <div class="input-group">
     @if ($prepend)
@@ -13,6 +14,24 @@
         <div class="input-group-text">{{ $prepend }}</div>
       </div>
     @endif
-    <input id="{{ $id }}" class="form-control" type="text" {{ $attributes }}>
+    <input id="{{ $id }}" class="form-control" type="text" wire:model.lazy="{{ $model }}"
+      {{ $attributes }} title="ok @error($model){{ $message }}@enderror" />
+    </div>
+    @error($model) <span class="small text-danger">{{ $message }}</span> @enderror
   </div>
-</div>
+
+  @Once
+    @section('javascripts_bottom')
+      @parent
+      <script>
+        $(function() {
+          $('.wire-input-text').find('input').popover({
+            html: true,
+            placement: 'top'
+          })
+
+        })
+      </script>
+    @endsection
+
+  @endonce
