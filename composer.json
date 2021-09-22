@@ -1,9 +1,14 @@
 {
-    "name": "laravel/laravel",
+    "name": "uspdev/portal-sistemas",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Portal de links organizados em grupos",
+    "homepage": "https://github.com/uspdev/portal-sistemas",
     "license": "MIT",
+    "authors": [{
+        "name": "Masaki Kawabata Neto",
+        "email": "kawabata@usp.br",
+        "homepage": "https://github.com/masakik"
+    }],
     "require": {
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "^2.0",
@@ -42,11 +47,11 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
             "@php artisan vendor:publish --provider=\"Uspdev\\UspTheme\\ServiceProvider\" --tag=assets --force",
-            "@php artisan vendor:publish --force --tag=livewire:assets --ansi",
-            "@php artisan vendor:publish --tag=laravel-pt-br-localization"
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi",
+            "@php artisan vendor:publish --tag=laravel-pt-br-localization"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
