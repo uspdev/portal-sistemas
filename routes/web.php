@@ -27,8 +27,3 @@ use Illuminate\Database\Eloquent\Collection;
 // });
 
 Route::get('/', ShowGrupos::class);
-
-Route::get('/session', function(){
-    dd(array_merge(['0'=>'?'],Grupo::colunaArray()));
-    dd(session()->all());
-});
