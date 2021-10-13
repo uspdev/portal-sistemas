@@ -19,6 +19,7 @@ Esse sistema pode ser usado como portal de sistemas da Unidade mas também pode 
 Procedimentos básicos para aplicações Laravel:
 
 * Clonar o projeto
+* Instalar as dependências com `composer install`
 * copiar o `.env.example` para `.env`
 * gerar chave: `php artisan key:generate`
 * configurar o `.env`: app, database, senhaunica, theme, replicado
