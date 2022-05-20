@@ -1,11 +1,9 @@
 <?php
 
 $menu = [
-    // [
-    //     'text' => '<i class="fas fa-cog"></i> Gerenciar sistemas',
-    //     'url' => 'sistemas',
-    //     'can' => 'admin'
-    // ],
+    [
+        'key' => 'portal-sistemas'
+    ],
 ];
 
 $right_menu = [

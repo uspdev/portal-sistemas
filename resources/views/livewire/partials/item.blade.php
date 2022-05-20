@@ -13,7 +13,7 @@
     <button class="btn px-1 py-0 toggleDescricao"><i class="fas fa-caret-down"></i></button>
   @endif
 
-  @includeWhen(Gate::allows('gerente'), 'livewire.partials.item-gerente-menu')
+  @includeWhen($gerenciar, 'livewire.partials.item-gerente-menu')
 
   <div class="descricao ml-3">{{ $item->descricao }}</div>
 </div>

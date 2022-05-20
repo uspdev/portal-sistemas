@@ -1,9 +1,11 @@
 <div>
 
-  @can('gerente')
+  @if($gerenciar)
     <button class="btn btn-primary mb-3" wire:click="$emit('criarGrupo')">Novo Grupo</button>
     <button class="btn btn-warning mb-3" wire:click="$emit('criarItem')">Novo Item de grupo</button>
   @endcan
+
+
 
   {{-- Grupos regulares --}}
   <div class="row">

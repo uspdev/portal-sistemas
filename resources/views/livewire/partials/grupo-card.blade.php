@@ -13,7 +13,7 @@
 
     {{-- mostra com hover do mouse --}}
     <span class=" to-show">
-      @includeWhen(Gate::allows('gerente'), 'livewire.partials.grupo-menu')
+      @includeWhen($gerenciar, 'livewire.partials.grupo-menu')
     </span>
 
     <div class="text-secondary">
