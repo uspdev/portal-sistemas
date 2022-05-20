@@ -165,6 +165,6 @@ class Grupo extends Model
      */
     public function itens()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Item::class)->orderBy('nome');
     }
 }
