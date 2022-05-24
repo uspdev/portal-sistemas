@@ -20,6 +20,11 @@ class ShowGrupos extends Component
         'refresh',
     ];
 
+    public function updateItensOrder($order)
+    {
+        dd($order);
+    }
+
     public function refresh()
     {
         $this->mount();
@@ -31,14 +36,20 @@ class ShowGrupos extends Component
             \UspTheme::addMenu('portal-sistemas', [
                 'text' => '<button class="btn btn-danger btn-sm">Habilitar edição</button>',
                 'url' => '?gerenciar=1',
-                'can' => 'gerente'
             ]);
         }
         if (Gate::allows('gerente') && $this->gerenciar == 1) {
             \UspTheme::addMenu('portal-sistemas', [
-                'text' => '<button class="btn btn-success btn-sm">Finalizar edição</button>',
-                'url' => '?gerenciar=0',
-                'can' => 'gerente'
+                [
+                    'text' => '<button class="btn btn-success btn-sm">Finalizar edição</button>',
+                    'url' => '?gerenciar=0',
+                ],
+                [
+                    'text' => '<button class="btn btn-sm btn-primary" onclick="window.livewire.emit(\'criarGrupo\')">Novo Grupo</button>',
+                ],
+                [
+                    'text' => '<button class="btn btn-sm btn-warning" onclick="window.livewire.emit(\'criarItem\')">Novo Item de grupo</button>',
+                ]
             ]);
         }
     }

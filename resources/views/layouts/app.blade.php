@@ -44,14 +44,7 @@
   </style>
 @endsection
 
-@section('footer')
-  Seu código
-@endsection
-
 @section('javascripts_bottom')
   @parent
   @livewireScripts
-  <script>
-    // Seu código .js
-  </script>
 @endsection

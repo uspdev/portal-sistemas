@@ -4,7 +4,8 @@
   @endif
 
   @if ($item->url)
-    <a href="{{ $item->url }}" target="_BLANK">{{ $item->nome }}</a>
+    <a href="{{ $item->url }}" target="_BLANK"
+      style="{{ $gerenciar ? 'pointer-events:none' : '' }}">{{ $item->nome }}</a>
   @else
     {{ $item->nome }}
   @endif
@@ -36,7 +37,6 @@
       $(document).ready(function() {
 
         $('body').on('click', '.toggleDescricao', function() {
-          console.log('toggleDescricao')
           $(this).parent().find('.descricao').slideToggle(200)
         })
 

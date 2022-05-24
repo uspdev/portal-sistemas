@@ -9,8 +9,8 @@
     <x-wire-textarea label="Descrição" model="grupo.descricao" />
 
     <div class="d-flex flex-row">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-primary ml-2" wire:click.prevent="salvarGrupo">Salvar</button>
+      <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancelar</button>
+      <button type="submit" class="btn btn-sm btn-primary ml-2" wire:click.prevent="salvarGrupo">Salvar</button>
     </div>
   </form>
 </div>

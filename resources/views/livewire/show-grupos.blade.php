@@ -1,12 +1,4 @@
 <div>
-
-  @if($gerenciar)
-    <button class="btn btn-primary mb-3" wire:click="$emit('criarGrupo')">Novo Grupo</button>
-    <button class="btn btn-warning mb-3" wire:click="$emit('criarItem')">Novo Item de grupo</button>
-  @endcan
-
-
-
   {{-- Grupos regulares --}}
   <div class="row">
     @foreach ($colunas as $col)
@@ -31,7 +23,7 @@
         @foreach ($grupos->where('coluna', $col)->sortBy('linha') as $grupo)
           @include('livewire.partials.grupo-card')
         @endforeach
-        
+
       </div>
     @endforeach
   </div>
@@ -75,6 +67,7 @@
 
   @section('javascripts_bottom')
     @parent
+    <script src="https://unpkg.com/@nextapps-be/livewire-sortablejs@0.1.1/dist/livewire-sortable.js"></script>
     <script>
       window.addEventListener('openGrupoModal', event => {
         $('#modalGrupo').find('.modal-title').html(event.detail.modalTitle)
