@@ -6,7 +6,7 @@ O Portal-sistemas permite criar um site para listar itens organizados em grupos.
 
 ## Características
 
-* Grupos são dispostos em até 4 colunas
+* Grupos são dispostos em até 4 colunas (via .env)
 * Grupos e ítens podem conter texto adicional. No grupo é sempre visível, no item pode ser exibido clicando no botão <img src="docs/caret-down.png" width="12px">
 * Login usando senha única: somente usuários autorizados previamente
 * Admins gerenciam usuários
@@ -19,11 +19,11 @@ Esse sistema pode ser usado como portal de sistemas da Unidade mas também pode 
 Procedimentos básicos para aplicações Laravel:
 
 * Clonar o projeto
-* Instalar as dependências com `composer install`
+* Instalar as dependências com `composer install --no-dev`
 * copiar o `.env.example` para `.env`
 * gerar chave: `php artisan key:generate`
 * configurar o `.env`: app, database, senhaunica, theme, replicado
-* rodar migrations: `php artisan migrate --seed` (ambiente dev)
+* rodar migrations: `php artisan migrate` (ambiente dev: `php artisan migrate --seed`)
 * rodar: `php artisan serve`
 
 Em ambiente **dev**, pode ser útil utilizar o [senhaunica-faker](https://github.com/uspdev/senhaunica-faker/).
