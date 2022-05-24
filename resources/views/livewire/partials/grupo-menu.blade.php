@@ -1,8 +1,8 @@
-<button class="btn btn-outline-warning d-inline-flex py-1" wire:click="$emit('editarGrupo', {{ $grupo->id }})">
+<button class="btn btn-sm btn-outline-warning d-inline-flex py-1" wire:click="$emit('editarGrupo', {{ $grupo->id }})">
   <i class="fas fa-pen"></i>
 </button>
 
-<button class="btn btn-outline-danger d-inline-flex py-1" onclick="destruirGrupo({{ $grupo->id }})">
+<button class="btn btn-sm btn-outline-danger d-inline-flex py-1" onclick="destruirGrupo({{ $grupo->id }})">
   <i class="fas fa-times"></i>
 </button>
 
