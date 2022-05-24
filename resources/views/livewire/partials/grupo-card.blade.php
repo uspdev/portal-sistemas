@@ -18,7 +18,7 @@
           class="list-group-item border-0 py-0 px-0">
           <div class="form-inline">
             @if ($gerenciar)
-              <span wire:sortable.handle class="mr-1"><i class="fas fa-grip-lines text-secondary"></i></span>
+              {{-- <span wire:sortable.handle class="mr-1"><i class="fas fa-grip-lines text-secondary"></i></span> --}}
             @endif
             @includeWhen($item->exibir || Gate::check('gerente'), 'livewire.partials.item')
           </div>
