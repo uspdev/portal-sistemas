@@ -17,16 +17,17 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
-        "uspdev/laravel-tools": "^0.1.0",
-        "uspdev/laravel-usp-theme": "^2.2",
-        "uspdev/replicado": "^1.8",
-        "uspdev/senhaunica-socialite": "^4.0"
+        "uspdev/laravel-tools": "^1.2",
+        "uspdev/laravel-usp-theme": "^2.7",
+        "uspdev/laravel-replicado": "^1",
+        "uspdev/senhaunica-socialite": "^4.3",
+        "ybr-nx/laravel-mariadb": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
-        "lucascudo/laravel-pt-br-localization": "^1.1",
+        "lucascudo/laravel-pt-br-localization": "^1.2",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
@@ -51,8 +52,8 @@
             "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi",
-            "@php artisan vendor:publish --tag=laravel-pt-br-localization"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "[ $COMPOSER_DEV_MODE -eq 0 ] || php artisan vendor:publish --tag=laravel-pt-br-localization --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

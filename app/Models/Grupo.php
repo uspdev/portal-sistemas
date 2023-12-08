@@ -19,6 +19,10 @@ class Grupo extends Model
         'exibir' => false,
     ];
 
+    protected $casts = [
+      'exibir' => 'boolean',
+    ];
+
     /**
      * The "booted" method of the model.
      *

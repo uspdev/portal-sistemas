@@ -13,6 +13,10 @@ class Item extends Model
         'exibir' => false,
     ];
 
+    protected $casts = [
+        'exibir' => 'boolean',
+    ];
+
     /**
      * The table associated with the model.
      *

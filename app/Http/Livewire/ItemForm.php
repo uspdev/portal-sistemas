@@ -32,16 +32,17 @@ class ItemForm extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function criarItem()
+    public function criarItem($grupo_id = null)
     {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         $this->mount();
+        $this->item->grupo_id = $grupo_id;
         $this->dispatchBrowserEvent('openItemModal', ['modalTitle' => 'Novo item']);
     }
 
     public function editarItem($itemId)
     {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         $this->item = Item::find($itemId);
         $this->gruposSelect = Grupo::pluck('nome', 'id');
         $this->dispatchBrowserEvent('openItemModal', ['modalTitle' => 'Editar item']);
@@ -50,7 +51,7 @@ class ItemForm extends Component
 
     public function salvarItem()
     {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         $this->validate();
         $this->item->save();
         $this->dispatchBrowserEvent('closeItemModal');
@@ -60,7 +61,7 @@ class ItemForm extends Component
 
     public function destruirItem($itemId)
     {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         Item::destroy($itemId);
         $this->mount(); // inicializa as variaveis
         $this->emitUp('refresh');

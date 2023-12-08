@@ -43,14 +43,14 @@ class GrupoForm extends Component
 
     public function criarGrupo()
     {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         $this->mount();
         $this->dispatchBrowserEvent('openGrupoModal', ['modalTitle'=>'Novo grupo']);
     }
 
     public function editarGrupo($grupoId)
     {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         $this->grupo = Grupo::find($grupoId);
         $this->colunaArray = $this->grupo->colunaArray();
         $this->ordemArray = $this->grupo->ordemArray();
@@ -59,7 +59,7 @@ class GrupoForm extends Component
     }
 
     public function salvarGrupo() {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         $this->validate();
 
         $this->grupo->save();
@@ -69,7 +69,7 @@ class GrupoForm extends Component
     }
 
     public function destruirGrupo($grupoId) {
-        Gate::allows('gerente');
+        Gate::allows('manager');
         Grupo::destroy($grupoId);
         $this->mount();
         $this->emitUp('refresh');
@@ -79,7 +79,7 @@ class GrupoForm extends Component
     {
         $this->grupo = new Grupo;
         $this->colunaArray = array_merge(['0'=>'?'],$this->grupo->colunaArray());
-        $this->ordemArray = []; // será carregado dinamicamente 
+        $this->ordemArray = []; // será carregado dinamicamente
         $this->resetErrorBag();
         $this->resetValidation();
     }

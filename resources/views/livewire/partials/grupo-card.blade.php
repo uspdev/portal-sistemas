@@ -6,7 +6,7 @@
       @endif
       {{ $grupo->nome }}
     </span>
-    @includeWhen(Gate::allows('gerente'), 'livewire.partials.badge-grupo-sem-coluna')
+    @includeWhen(Gate::allows('manager'), 'livewire.partials.badge-grupo-sem-coluna')
     @includeWhen($gerenciar, 'livewire.partials.grupo-menu')
     <div class="text-secondary">{{ $grupo->descricao }}</div>
   </div>

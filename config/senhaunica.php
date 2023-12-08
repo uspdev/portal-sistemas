@@ -42,7 +42,7 @@ return [
     // Se false, não usará permission ao efetuar login
     'permission' => true,
 
-    // permite login somente de usuários já cadastrados na base local ou autorizados nos admins, gerentes ou users
+    // permite login somente de usuários já cadastrados na base local ou autorizados nos admins, managers ou users
     'onlyLocalUsers' => true,
 
     // se true, revoga as permissões do usuario se não estiver no env.
@@ -52,8 +52,8 @@ return [
     // cadastre os admins separados por virgula
     'admins' => array_map('trim', explode(',', env('SENHAUNICA_ADMINS', ''))),
 
-    // cadastre os gerentes separados por virgula
-    'gerentes' => array_map('trim', explode(',', env('SENHAUNICA_GERENTES', ''))),
+    // cadastre os managers separados por virgula
+    'managers' => array_map('trim', explode(',', env('SENHAUNICA_GERENTES', ''))),
 
     // se quiser cadastre os usuários comuns autorizados. Relevante se onlyLocalUsers = true
     'users' => array_map('trim', explode(',', env('SENHAUNICA_USERS', ''))),
@@ -63,6 +63,10 @@ return [
 
     'dev' => env('SENHAUNICA_DEV', 'no'),
     'callback_id' => env('SENHAUNICA_CALLBACK_ID'),
+
+    // codigo da unidade para identificar logins proprios
+    // relevante se permission=true
+    'codigoUnidade' => env('SENHAUNICA_CODIGO_UNIDADE'),
 
     // SENHAUNICA_KEY e SENHAUNICA_SECRET são carregados em services.php da biblioteca
 ];

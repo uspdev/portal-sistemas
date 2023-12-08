@@ -14,6 +14,14 @@ O Portal-sistemas permite criar um site para listar itens organizados em grupos.
 
 Esse sistema pode ser usado como portal de sistemas da Unidade mas também pode ser usado como uma coleção de links para uma finalidade específica.
 
+## Atualizações
+
+### 12/2023 - versão 1.1
+
+* atualizado as bibliotecas USPdev;
+* necessário reconfigurar o .env;
+* as permissões de gerente passaram a ser manager: necessário atualizar os usuários autorizados;
+
 ## Instalação e configuração
 
 Procedimentos básicos para aplicações Laravel:

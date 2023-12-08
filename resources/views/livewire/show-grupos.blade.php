@@ -6,7 +6,7 @@
 
         {{-- Mostra os grupos de uma mesma coluna --}}
         @foreach ($grupos->where('coluna', $col)->sortBy('linha') as $grupo)
-          @if ($grupo->exibir || Gate::check('gerente'))
+          @if ($grupo->exibir || Gate::check('manager'))
             @include('livewire.partials.grupo-card')
           @endif
         @endforeach
@@ -29,7 +29,7 @@
   </div>
 
   {{-- Itens sem grupo --}}
-  @includeWhen(Gate::allows('gerente') && $itensSemGrupo->isNotEmpty(), 'livewire.partials.itens-sem-grupo')
+  @includeWhen(Gate::allows('manager') && $itensSemGrupo->isNotEmpty(), 'livewire.partials.itens-sem-grupo')
 
   <!-- Modal de grupo -->
   <div class="modal" tabindex="-1" id="modalGrupo">
@@ -67,7 +67,7 @@
 
   @section('javascripts_bottom')
     @parent
-    <script src="https://unpkg.com/@nextapps-be/livewire-sortablejs@0.1.1/dist/livewire-sortable.js"></script>
+    {{-- <script src="https://unpkg.com/@nextapps-be/livewire-sortablejs@0.1.1/dist/livewire-sortable.js"></script> --}}
     <script>
       window.addEventListener('openGrupoModal', event => {
         $('#modalGrupo').find('.modal-title').html(event.detail.modalTitle)

@@ -32,13 +32,13 @@ class ShowGrupos extends Component
 
     public function menuDinamico()
     {
-        if (Gate::allows('gerente') && $this->gerenciar == 0) {
+        if (Gate::allows('manager') && $this->gerenciar == 0) {
             \UspTheme::addMenu('portal-sistemas', [
                 'text' => '<button class="btn btn-danger btn-sm">Habilitar edição</button>',
                 'url' => '?gerenciar=1',
             ]);
         }
-        if (Gate::allows('gerente') && $this->gerenciar == 1) {
+        if (Gate::allows('manager') && $this->gerenciar == 1) {
             \UspTheme::addMenu('portal-sistemas', [
                 [
                     'text' => '<button class="btn btn-success btn-sm">Finalizar edição</button>',
@@ -47,9 +47,9 @@ class ShowGrupos extends Component
                 [
                     'text' => '<button class="btn btn-sm btn-primary" onclick="window.livewire.emit(\'criarGrupo\')">Novo Grupo</button>',
                 ],
-                [
-                    'text' => '<button class="btn btn-sm btn-warning" onclick="window.livewire.emit(\'criarItem\')">Novo Item de grupo</button>',
-                ]
+                // [
+                //     'text' => '<button class="btn btn-sm btn-warning" onclick="window.livewire.emit(\'criarItem\')">Novo Item de grupo</button>',
+                // ]
             ]);
         }
     }
@@ -69,7 +69,7 @@ class ShowGrupos extends Component
         $this->gerenciar($request);
         $this->menuDinamico();
 
-        $this->itensSemGrupo = Gate::allows('gerente') ? Item::whereNull('grupo_id')->get() : collect();
+        $this->itensSemGrupo = Gate::allows('manager') ? Item::whereNull('grupo_id')->get() : collect();
         $this->grupos = Grupo::all();
 
         $this->colunas = range(1, config('portal-sistemas.num_cols'));

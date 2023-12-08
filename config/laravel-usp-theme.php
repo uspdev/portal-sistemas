@@ -2,31 +2,25 @@
 
 $menu = [
     [
-        'key' => 'portal-sistemas'
+        'key' => 'portal-sistemas',
     ],
 ];
 
 $right_menu = [
     [
-        // menu utilizado para views da biblioteca senhaunica-socialite.
         'key' => 'senhaunica-socialite',
     ],
-    // [
-    //     'text' => '<i class="fas fa-cog"></i>',
-    //     'title' => 'Configurações',
-    //     'target' => '_blank',
-    //     'url' => config('app.url') . '/item1',
-    //     'align' => 'right',
-    // ],
+    [
+        'key' => 'laravel-tools',
+    ],
 ];
-
 
 return [
     # valor default para a tag title, dentro da section title.
     # valor pode ser substituido pela aplicação.
     'title' => config('app.name'),
 
-    # USP_THEME_SKIN deve ser colocado no .env da aplicação 
+    # USP_THEME_SKIN deve ser colocado no .env da aplicação
     'skin' => env('USP_THEME_SKIN', 'uspdev'),
 
     # chave da sessão. Troque em caso de colisão com outra variável de sessão.

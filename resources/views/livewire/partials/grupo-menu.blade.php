@@ -1,9 +1,16 @@
-<button class="btn btn-sm btn-outline-warning d-inline-flex py-1" wire:click="$emit('editarGrupo', {{ $grupo->id }})">
+<button class="btn btn-sm btn-outline-warning d-inline-flex py-1" wire:click="$emit('editarGrupo', {{ $grupo->id }})"
+  title="Editar grupo">
   <i class="fas fa-pen"></i>
 </button>
 
-<button class="btn btn-sm btn-outline-danger d-inline-flex py-1" onclick="destruirGrupo({{ $grupo->id }})">
+<button class="btn btn-sm btn-outline-danger d-inline-flex py-1" onclick="destruirGrupo({{ $grupo->id }})"
+  title="Remover grupo">
   <i class="fas fa-times"></i>
+</button>
+
+<button class="btn btn-sm btn-outline-success d-inline-flex py-1" wire:click="$emit('criarItem', {{ $grupo->id }})"
+  title="Criar item no grupo">
+  <i class="fas fa-plus"></i>
 </button>
 
 @once
