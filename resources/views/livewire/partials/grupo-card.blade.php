@@ -20,7 +20,7 @@
             @if ($gerenciar)
               {{-- <span wire:sortable.handle class="mr-1"><i class="fas fa-grip-lines text-secondary"></i></span> --}}
             @endif
-            @includeWhen($item->exibir || Gate::check('gerente'), 'livewire.partials.item')
+            @includeWhen($item->exibir || Gate::check('manager'), 'livewire.partials.item')
           </div>
         </li>
       @endforeach
