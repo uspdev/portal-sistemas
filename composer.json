@@ -12,8 +12,8 @@
     "require": {
         "php": "^8.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^9.0",
-        "laravel/sanctum": "^2.11",
+        "laravel/framework": "^10.0",
+        "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
         "uspdev/laravel-tools": "^1.2",
@@ -23,13 +23,13 @@
         "ybr-nx/laravel-mariadb": "^1.0"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^1.0",
+        "spatie/laravel-ignition": "^2.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "lucascudo/laravel-pt-br-localization": "^1.2",
         "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.3.3"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0"
     },
     "autoload": {
         "psr-4": {
