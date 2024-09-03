@@ -1,5 +1,5 @@
 <div>
-  <form>
+  <form wire:submit.prevent="salvarGrupo">
     <div class="d-flex">
       <x-wire-input-text model="grupo.nome" prepend="Nome" class="mr-auto" />
       <x-wire-select prepend="COL" :options="$colunaArray" model="grupo.coluna" />
@@ -10,7 +10,7 @@
 
     <div class="d-flex flex-row">
       <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancelar</button>
-      <button type="submit" class="btn btn-sm btn-primary ml-2" wire:click.prevent="salvarGrupo">Salvar</button>
+      <button type="submit" class="btn btn-sm btn-primary ml-2">Salvar</button>
     </div>
   </form>
 </div>

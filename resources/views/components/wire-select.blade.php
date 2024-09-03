@@ -14,7 +14,7 @@
     @endif
     <select 
       class="custom-select" 
-      wire:model="{{ $model }}" 
+      wire:model.live="{{ $model }}" 
       {{ $attributes }}>
 
       {{ $slot }}

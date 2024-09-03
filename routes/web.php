@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Grupo;
-use App\Http\Livewire\ShowGrupos;
+use App\Livewire\ShowGrupos;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;

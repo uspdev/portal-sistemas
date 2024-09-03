@@ -1,5 +1,5 @@
 <span class="to-show ml-2">
-  <button class="btn btn-sm btn-outline-primary py-0" wire:click="$emit('editarItem', {{ $item->id }})">
+  <button class="btn btn-sm btn-outline-primary py-0" wire:click="$dispatch('editarItem', {itemId: {{ $item->id }} })">
     <i class="fas fa-edit"></i>
   </button>
   <button class="btn btn-sm btn-outline-danger py-0" onclick="destruirItem({{ $item->id }})">
@@ -12,9 +12,9 @@
     @parent
     <script>
       function destruirItem(id) {
-        console.log('destruirItem', id)
+        // console.log('destruirItem', id)
         if (confirm('Tem certeza?')) {
-          Livewire.emit('destruirItem', id)
+          Livewire.dispatch('destruirItem', { itemId: id })
         }
       }
     </script>
