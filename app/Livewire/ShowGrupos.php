@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Item;
 use App\Models\Grupo;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Livewire\Attributes\On;
 
 class ShowGrupos extends Component
 {
@@ -16,15 +17,12 @@ class ShowGrupos extends Component
     public $colunasPerdidas;
     public $gerenciar;
 
-    protected $listeners = [
-        'refresh',
-    ];
-
     public function updateItensOrder($order)
     {
-        dd($order);
+   //    dd($order);
     }
 
+    #[On('refresh')]
     public function refresh()
     {
         $this->mount();
@@ -45,10 +43,10 @@ class ShowGrupos extends Component
                     'url' => '?gerenciar=0',
                 ],
                 [
-                    'text' => '<button class="btn btn-sm btn-primary" onclick="window.livewire.emit(\'criarGrupo\')">Novo Grupo</button>',
+                    'text' => '<button class="btn btn-sm btn-primary" onclick="Livewire.dispatch(\'criarGrupo\')">Novo Grupo</button>',
                 ],
                 // [
-                //     'text' => '<button class="btn btn-sm btn-warning" onclick="window.livewire.emit(\'criarItem\')">Novo Item de grupo</button>',
+                //     'text' => '<button class="btn btn-sm btn-warning" onclick="window.livewire.dispatch(\'criarItem\')">Novo Item de grupo</button>',
                 // ]
             ]);
         }

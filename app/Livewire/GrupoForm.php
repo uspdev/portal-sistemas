@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Grupo;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
+use Livewire\Attributes\On;
 
 class GrupoForm extends Component
 {
@@ -13,19 +14,16 @@ class GrupoForm extends Component
     public $colunaArray;
     public $ordemArray;
 
-    protected $rules = [
-        'grupo.nome' => 'required|string|max:100',
-        'grupo.coluna' => 'required|integer|min:1', //colocar limites min e max
-        'grupo.linha' => 'required|integer',
-        'grupo.exibir' => 'required|boolean',
-        'grupo.descricao' => 'nullable|string',
-    ];
-
-    protected $listeners = [
-        'criarGrupo',
-        'editarGrupo',
-        'destruirGrupo',
-    ];
+    public function rules()
+    {
+        return [
+            'grupo.nome' => 'required|string|max:100',
+            'grupo.coluna' => 'required|integer|min:1', //colocar limites min e max
+            'grupo.linha' => 'required|integer',
+            'grupo.exibir' => 'required|boolean',
+            'grupo.descricao' => 'nullable|string',
+        ];
+    }
 
     public function updated($propertyName)
     {
@@ -41,38 +39,42 @@ class GrupoForm extends Component
         }
     }
 
+    #[On('criarGrupo')]
     public function criarGrupo()
     {
         Gate::allows('manager');
         $this->mount();
-        $this->dispatchBrowserEvent('openGrupoModal', ['modalTitle'=>'Novo grupo']);
+        $this->dispatch('openGrupoModal', modalTitle: 'Novo grupo');
     }
 
+    #[On('editarGrupo')]
     public function editarGrupo($grupoId)
     {
         Gate::allows('manager');
         $this->grupo = Grupo::find($grupoId);
         $this->colunaArray = $this->grupo->colunaArray();
         $this->ordemArray = $this->grupo->ordemArray();
-        $this->dispatchBrowserEvent('openGrupoModal', ['modalTitle'=>'Editar grupo']);
+        $this->dispatch('openGrupoModal', modalTitle: 'Editar grupo');
         $this->validate();
     }
 
     public function salvarGrupo() {
         Gate::allows('manager');
-        $this->validate();
 
+        $this->validate();
         $this->grupo->save();
-        $this->dispatchBrowserEvent('closeGrupoModal');
+
+        $this->dispatch('closeGrupoModal');
         $this->mount();
-        $this->emitUp('refresh');
+        $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
+    #[On('destruirGrupo')]
     public function destruirGrupo($grupoId) {
         Gate::allows('manager');
         Grupo::destroy($grupoId);
         $this->mount();
-        $this->emitUp('refresh');
+        $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
     public function mount()
@@ -80,8 +82,6 @@ class GrupoForm extends Component
         $this->grupo = new Grupo;
         $this->colunaArray = array_merge(['0'=>'?'],$this->grupo->colunaArray());
         $this->ordemArray = []; // será carregado dinamicamente
-        $this->resetErrorBag();
-        $this->resetValidation();
     }
 
     public function render()

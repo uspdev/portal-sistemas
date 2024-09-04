@@ -10,7 +10,7 @@
     type="checkbox"
     class="custom-control-input"
     id="{{ $id }}"
-    wire:model="{{ $model }}"
+    wire:model.live="{{ $model }}"
     {{ $attributes }}
   />
   @if ($label)

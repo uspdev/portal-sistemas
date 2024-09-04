@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Grupo;
 use App\Models\Item;
 use Illuminate\Support\Facades\Gate;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ItemForm extends Component
@@ -21,31 +22,27 @@ class ItemForm extends Component
         'item.grupo_id' => ['required', 'exists:grupos,id'],
     ];
 
-    protected $listeners = [
-        'criarItem',
-        'editarItem',
-        'destruirItem',
-    ];
-
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
 
+    #[On('criarItem')]
     public function criarItem($grupo_id = null)
     {
         Gate::allows('manager');
         $this->mount();
         $this->item->grupo_id = $grupo_id;
-        $this->dispatchBrowserEvent('openItemModal', ['modalTitle' => 'Novo item']);
+        $this->dispatch('openItemModal', modalTitle:'Novo item');
     }
 
+    #[On('editarItem')]
     public function editarItem($itemId)
     {
         Gate::allows('manager');
         $this->item = Item::find($itemId);
         $this->gruposSelect = Grupo::pluck('nome', 'id');
-        $this->dispatchBrowserEvent('openItemModal', ['modalTitle' => 'Editar item']);
+        $this->dispatch('openItemModal', modalTitle: 'Editar item');
         $this->validate();
     }
 
@@ -54,17 +51,18 @@ class ItemForm extends Component
         Gate::allows('manager');
         $this->validate();
         $this->item->save();
-        $this->dispatchBrowserEvent('closeItemModal');
+        $this->dispatch('closeItemModal');
         $this->mount();
-        $this->emitUp('refresh');
+        $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
+    #[On('destruirItem')]
     public function destruirItem($itemId)
     {
         Gate::allows('manager');
         Item::destroy($itemId);
         $this->mount(); // inicializa as variaveis
-        $this->emitUp('refresh');
+        $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
     public function mount()

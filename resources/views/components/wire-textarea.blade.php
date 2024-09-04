@@ -20,7 +20,7 @@
       class="form-control"
       rows="{{ $rows }}"
       id="{{ $id }}"
-      wire:model.lazy="{{ $model }}"
+      wire:model.blur="{{ $model }}"
       {{ $attributes }}
     ></textarea>
   </div>

@@ -1,4 +1,4 @@
-<button class="btn btn-sm btn-outline-warning d-inline-flex py-1" wire:click="$emit('editarGrupo', {{ $grupo->id }})"
+<button class="btn btn-sm btn-outline-warning d-inline-flex py-1" wire:click="$dispatch('editarGrupo', { grupoId: {{ $grupo->id }} })"
   title="Editar grupo">
   <i class="fas fa-pen"></i>
 </button>
@@ -8,7 +8,7 @@
   <i class="fas fa-times"></i>
 </button>
 
-<button class="btn btn-sm btn-outline-success d-inline-flex py-1" wire:click="$emit('criarItem', {{ $grupo->id }})"
+<button class="btn btn-sm btn-outline-success d-inline-flex py-1" wire:click="$dispatch('criarItem', { grupo_id: {{ $grupo->id }} })"
   title="Criar item no grupo">
   <i class="fas fa-plus"></i>
 </button>
@@ -18,9 +18,9 @@
     @parent
     <script>
       function destruirGrupo(id) {
-        console.log(id)
+        // console.log(id)
         if (confirm('Tem certeza?')) {
-          Livewire.emit('destruirGrupo', id)
+          Livewire.dispatch('destruirGrupo', { grupoId: id })
         }
       }
     </script>
