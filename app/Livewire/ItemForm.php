@@ -7,12 +7,16 @@ use App\Models\Item;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\Locked;
 
 class ItemForm extends Component
 {
 
     public $item;
     public $gruposSelect;
+
+    #[Locked]
+    public bool $isManager = false;
 
     protected $rules = [
         'item.nome' => 'required',
@@ -30,8 +34,8 @@ class ItemForm extends Component
     #[On('criarItem')]
     public function criarItem($grupo_id = null)
     {
-        Gate::allows('manager');
-        $this->mount();
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
+        $this->limparFormulario();
         $this->item->grupo_id = $grupo_id;
         $this->dispatch('openItemModal', modalTitle:'Novo item');
     }
@@ -39,7 +43,7 @@ class ItemForm extends Component
     #[On('editarItem')]
     public function editarItem($itemId)
     {
-        Gate::allows('manager');
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
         $this->item = Item::find($itemId);
         $this->gruposSelect = Grupo::pluck('nome', 'id');
         $this->dispatch('openItemModal', modalTitle: 'Editar item');
@@ -48,24 +52,30 @@ class ItemForm extends Component
 
     public function salvarItem()
     {
-        Gate::allows('manager');
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
         $this->validate();
         $this->item->save();
         $this->dispatch('closeItemModal');
-        $this->mount();
+        $this->limparFormulario();
         $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
     #[On('destruirItem')]
     public function destruirItem($itemId)
     {
-        Gate::allows('manager');
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
         Item::destroy($itemId);
-        $this->mount(); // inicializa as variaveis
+        $this->limparFormulario();
         $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
     public function mount()
+    {   
+        $this->isManager = Gate::check('manager');
+        $this->limparFormulario();
+    }
+
+    public function limparFormulario()
     {
         $this->item = new Item;
         $this->gruposSelect = Grupo::pluck('nome', 'id')->prepend('Selecione um..', 0);
@@ -77,4 +87,6 @@ class ItemForm extends Component
     {
         return view('livewire.item-form');
     }
+
+    
 }

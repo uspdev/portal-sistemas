@@ -1,4 +1,4 @@
-<div class="to-hover hover-bg item">
+<div class="to-hover hover-bg item" wire:key="item-{{ $item->id }}">
   @if (!$item->exibir)
     <span class="badge text-warning"><i class="fas fa-eye-slash"></i></span>
   @endif

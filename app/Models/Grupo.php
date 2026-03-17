@@ -147,11 +147,20 @@ class Grupo extends Model
         return $this;
     }
 
-    public static function colunaArray()
-    {
-        $range = range(1, config('portal-sistemas.num_cols'));
-        return array_combine($range, $range);
+public static function colunaArray($colunaAtual = null)
+{
+    $num_cols = config('portal-sistemas.num_cols');
+    $range = range(1, $num_cols);
+    $opcoes = array_combine($range, $range);
+
+    if ($colunaAtual > $num_cols) {
+        $opcoes[$colunaAtual] = 'Sem coluna';
     }
+
+    ksort($opcoes);
+
+    return $opcoes;
+}
 
     public function ordemArray($coluna = null)
     {

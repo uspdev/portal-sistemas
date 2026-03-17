@@ -8,6 +8,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
 
 class ShowGrupos extends Component
 {
@@ -17,6 +18,9 @@ class ShowGrupos extends Component
     public $colunasPerdidas;
     public $gerenciar;
 
+    #[Locked]
+    public bool $isManager = false;
+
     public function updateItensOrder($order)
     {
    //    dd($order);
@@ -25,18 +29,19 @@ class ShowGrupos extends Component
     #[On('refresh')]
     public function refresh()
     {
-        $this->mount();
+        $this->itensSemGrupo = $this->isManager ? Item::whereNull('grupo_id')->get() : collect();
+        $this->grupos = Grupo::all();
     }
 
     public function menuDinamico()
     {
-        if (Gate::allows('manager') && $this->gerenciar == 0) {
+        if ($this->isManager && $this->gerenciar == 0) {
             \UspTheme::addMenu('portal-sistemas', [
                 'text' => '<button class="btn btn-danger btn-sm">Habilitar edição</button>',
                 'url' => '?gerenciar=1',
             ]);
         }
-        if (Gate::allows('manager') && $this->gerenciar == 1) {
+        if ($this->isManager && $this->gerenciar == 1) {
             \UspTheme::addMenu('portal-sistemas', [
                 [
                     'text' => '<button class="btn btn-success btn-sm">Finalizar edição</button>',
@@ -63,11 +68,14 @@ class ShowGrupos extends Component
     }
 
     public function mount(Request $request = null)
-    {
+    {   
+
+        $this->isManager = Gate::check('manager');
+
         $this->gerenciar($request);
         $this->menuDinamico();
 
-        $this->itensSemGrupo = Gate::allows('manager') ? Item::whereNull('grupo_id')->get() : collect();
+        $this->itensSemGrupo = $this->isManager ? Item::whereNull('grupo_id')->get() : collect();
         $this->grupos = Grupo::all();
 
         $this->colunas = range(1, config('portal-sistemas.num_cols'));

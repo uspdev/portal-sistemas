@@ -6,6 +6,7 @@ use App\Models\Grupo;
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Locked;
 
 class GrupoForm extends Component
 {
@@ -14,11 +15,17 @@ class GrupoForm extends Component
     public $colunaArray;
     public $ordemArray;
 
+    #[Locked]
+    public bool $isManager = false;
+
     public function rules()
-    {
+    {   
+
+        $colunasValidas = implode(',', array_keys($this->colunaArray));
+
         return [
             'grupo.nome' => 'required|string|max:100',
-            'grupo.coluna' => 'required|integer|min:1', //colocar limites min e max
+            'grupo.coluna' => "required|integer|min:1|in:{$colunasValidas}",
             'grupo.linha' => 'required|integer',
             'grupo.exibir' => 'required|boolean',
             'grupo.descricao' => 'nullable|string',
@@ -42,46 +49,53 @@ class GrupoForm extends Component
     #[On('criarGrupo')]
     public function criarGrupo()
     {
-        Gate::allows('manager');
-        $this->mount();
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
+        $this->limparFormulario();
         $this->dispatch('openGrupoModal', modalTitle: 'Novo grupo');
     }
 
     #[On('editarGrupo')]
     public function editarGrupo($grupoId)
     {
-        Gate::allows('manager');
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
         $this->grupo = Grupo::find($grupoId);
-        $this->colunaArray = $this->grupo->colunaArray();
+        $this->colunaArray = Grupo::colunaArray($this->grupo->coluna);
         $this->ordemArray = $this->grupo->ordemArray();
         $this->dispatch('openGrupoModal', modalTitle: 'Editar grupo');
-        $this->validate();
+        $this->resetValidation();
     }
 
     public function salvarGrupo() {
-        Gate::allows('manager');
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
 
         $this->validate();
         $this->grupo->save();
 
         $this->dispatch('closeGrupoModal');
-        $this->mount();
+        $this->limparFormulario();
         $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
     #[On('destruirGrupo')]
     public function destruirGrupo($grupoId) {
-        Gate::allows('manager');
+        abort_if(!$this->isManager, 403, 'Acesso Negado');
         Grupo::destroy($grupoId);
-        $this->mount();
+        $this->limparFormulario();
         $this->dispatch('refresh')->to(ShowGrupos::class);
     }
 
     public function mount()
     {
+        $this->isManager = Gate::check('manager');
+        $this->limparFormulario();
+    }
+
+    public function limparFormulario()
+    {
         $this->grupo = new Grupo;
-        $this->colunaArray = array_merge(['0'=>'?'],$this->grupo->colunaArray());
-        $this->ordemArray = []; // será carregado dinamicamente
+        $this->colunaArray = Grupo::colunaArray();
+        $this->ordemArray = []; 
+        $this->resetValidation();
     }
 
     public function render()

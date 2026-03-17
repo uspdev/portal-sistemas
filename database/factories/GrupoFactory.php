@@ -23,9 +23,13 @@ class GrupoFactory extends Factory
     {
         $descricao = (rand(1, 10) > 8) ? $this->faker->text : '';
         $exibir = (rand(1, 10) > 9) ? false : true;
+
+        $num_cols = config('portal-sistemas.num_cols', 3);
+        $coluna = (rand(1, 10) > 8) ? ($num_cols + 1) : rand(1, $num_cols);
+
         return [
             'nome' => $this->faker->word,
-            'coluna' => rand(1, 4),
+            'coluna' => $coluna,
             'descricao' => $descricao,
             'exibir' => $exibir,
         ];

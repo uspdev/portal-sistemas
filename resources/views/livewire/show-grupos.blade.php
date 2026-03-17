@@ -6,7 +6,7 @@
 
         {{-- Mostra os grupos de uma mesma coluna --}}
         @foreach ($grupos->where('coluna', $col)->sortBy('linha') as $grupo)
-          @if ($grupo->exibir || Gate::check('manager'))
+          @if ($grupo->exibir || $isManager)
             @include('livewire.partials.grupo-card')
           @endif
         @endforeach
@@ -29,7 +29,7 @@
   </div>
 
   {{-- Itens sem grupo --}}
-  @includeWhen(Gate::allows('manager') && $itensSemGrupo->isNotEmpty(), 'livewire.partials.itens-sem-grupo')
+  @includeWhen($isManager && $itensSemGrupo->isNotEmpty(), 'livewire.partials.itens-sem-grupo')
 
   <!-- Modal de grupo -->
   <div class="modal" tabindex="-1" id="modalGrupo">
