@@ -16,6 +16,11 @@ Esse sistema pode ser usado como portal de sistemas da Unidade mas também pode 
 
 ## Atualizações
 
+### 3/2026 - versão 3
+
+* Atualizado laravel 12
+* Atualizado livewire v3
+
 ### 12/2023 - versão 1.1
 
 * atualizado as bibliotecas USPdev;
